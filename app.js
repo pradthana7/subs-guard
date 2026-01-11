@@ -16,9 +16,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 
-if (NODE_ENV === "production") {
-    app.use(arcjetMiddleware);
-}
+
+
+app.use(arcjetMiddleware);
 
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/users', userRoute);
