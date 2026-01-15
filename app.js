@@ -29,13 +29,11 @@ app.use('/api/v1/workflows', workflowRoutes);
 app.use(errorMiddleware);
 
 app.get('/', (req, res) => {
-    res.send('Welcome to my life');
+    res.send('Welcome to Subs-guard');
 });
 
-app.listen(PORT, async () => {
-    console.log(`Listening on http://localhost:${PORT}`);
-
-    await connectToDatabase();
-});
+if (process.env.NODE_ENV !== "production") {
+    app.listen(process.env.PORT ?? 3000);
+}
 
 export default app;
