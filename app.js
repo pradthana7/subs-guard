@@ -1,4 +1,3 @@
-// app.js
 import express from "express";
 import cookieParser from "cookie-parser";
 import connectToDatabase from "./database/mongodb.js";
@@ -12,7 +11,6 @@ import arcjetMiddleware from "./middlewares/arcjet.middleware.js";
 
 const app = express();
 
-// ✅ CRITICAL: connect DB on cold start
 await connectToDatabase();
 
 app.use(express.json());
