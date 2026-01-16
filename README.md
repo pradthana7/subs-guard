@@ -28,7 +28,8 @@ https://pradthana-subs-guard.vercel.app
 | Method | Endpoint                                  | Description                                                                         |
 |-------:|-------------------------------------------|-------------------------------------------------------------------------------------|
 |   POST | `/api/v1/workflows/subscription/reminder` | Trigger automated email reminders before subscription renewal (7, 5, 2, and 1 days) |
-**Note:** This workflow is triggered internally and does not need to be called directly by clients.
+
+>**Note:** This workflow is triggered internally and does not need to be called directly by clients.
 
 ## Authentication
 
