@@ -1,4 +1,3 @@
-// config/env.js
 import 'dotenv/config';
 
 function must(key) {

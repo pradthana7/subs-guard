@@ -25,18 +25,25 @@ export const signUp = async (req, res, next) => {
         const hashedPassword = await bcrypt.hash(password, salt);
 
         const newUsers = await User.create([{name, email, password: hashedPassword}], {session});
-
-        const token = jwt.sign({userId: newUsers[0]._id}, JWT_SECRET, {expiresIn: JWT_EXPIRES_IN});
+        const user = newUsers[0];
+        const token = jwt.sign({userId: user._id}, JWT_SECRET, {expiresIn: JWT_EXPIRES_IN});
 
         await session.commitTransaction();
         session.endSession();
+
+        const safeUser = {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            createdAt: user.createdAt,
+        };
 
         res.status(201).json({
             success: true,
             message: 'User successfully created!',
             data: {
-                token,
-                user: newUsers[0]
+                accessToken: token,
+                user: safeUser
             }
         });
     } catch (error) {
@@ -69,13 +76,19 @@ export const signIn = async (req, res, next) => {
         }
 
         const token = jwt.sign({userId: user._id}, JWT_SECRET, {expiresIn: JWT_EXPIRES_IN});
+        const safeUser = {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            createdAt: user.createdAt,
+        };
 
         res.status(201).json({
             success: true,
             message: "User signed in successfully.",
             data: {
-                token,
-                user
+                accessToken: token,
+                user:safeUser
             }
         });
 
