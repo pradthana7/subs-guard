@@ -59,7 +59,12 @@ const subscriptionSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
         index: true,
+    },
+    cancelledAt: {
+        type: Date,
+        default: null,
     }
+
 }, { timestamps: true });
 
 
